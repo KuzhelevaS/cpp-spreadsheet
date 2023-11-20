@@ -299,6 +299,7 @@ void TestCellReferences() {
 
     // Ссылка на пустую ячейку
     sheet->SetCell("B2"_pos, "=B1");
+    sheet->SetCell("B1"_pos, "");
     ASSERT(sheet->GetCell("B1"_pos)->GetReferencedCells().empty());
     ASSERT_EQUAL(sheet->GetCell("B2"_pos)->GetReferencedCells(), std::vector{"B1"_pos});
 
@@ -344,6 +345,14 @@ void TestCellCircularReferences() {
 
     ASSERT(caught);
     ASSERT_EQUAL(sheet->GetCell("M6"_pos)->GetText(), "Ready");
+
+    bool self = false;
+    try {
+        sheet->SetCell("A1"_pos, "=A1");
+    } catch (const CircularDependencyException&) {
+        self = true;
+    }
+    ASSERT(self);
 }
 }  // namespace
 
@@ -365,7 +374,7 @@ int main() {
     RUN_TEST(tr, TestEmptyCellTreatedAsZero);
     RUN_TEST(tr, TestFormulaInvalidPosition);
     RUN_TEST(tr, TestPrint);
-    //RUN_TEST(tr, TestCellReferences);
+    RUN_TEST(tr, TestCellReferences);
     RUN_TEST(tr, TestFormulaIncorrect);
     RUN_TEST(tr, TestCellCircularReferences);
     return 0;
