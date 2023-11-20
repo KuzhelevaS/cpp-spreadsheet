@@ -11,7 +11,7 @@
 Для сборки и запуска проекта необходимы:
 * версия С++17 или выше,
 * CMake версии 3.8 или выше,
-* Библиотека [ANTLR](https://www.antlr.org/) версии 4.12.0 или выше. Файлы для скачивания можно найти [на github](https://github.com/antlr/website-antlr4/tree/gh-pages/download).
+* библиотека [ANTLR](https://www.antlr.org/) версии 4.12.0 или выше. Файлы для скачивания можно найти [на github](https://github.com/antlr/website-antlr4/tree/gh-pages/download).
 
 ## Подготовка и компиляция
 В корне проекта  (рядом с `CMakeLists.txt`) создайте папку `antlr4_runtime`. Распакуйте в нее содержимое архива `antlr4-cpp-runtime-*-source.zip`.
